@@ -1,0 +1,19 @@
+<div class="starter-template">
+  <img src="/assets/vendor1.PNG" alt="Vendor 1" height="900" width="1300"><br>
+  <img src="/assets/vendor2.PNG" alt="Vendor 2" height="900" width="1300"><br>
+  <img src="/assets/vendor3.PNG" alt="Vendor 3" height="900" width="1300"><br>
+  <img src="/assets/vendor4.PNG" alt="Vendor 4" height="900" width="1300"><br>
+  <img src="/assets/vendor5.PNG" alt="Vendor 5" height="900" width="1300"><br>
+  <img src="/assets/vendor6.PNG" alt="Vendor 6" height="100" width="1300"><br>
+  <p>
+    <% if current_user.admin? %>
+      <a href="/packets" class="btn btn-primary">
+        View Packets
+      </a>
+    <% else %>
+      <% link = '/packets/' + current_user.id.to_s + '/edit' %>
+      <%= link_to 'View Packet', link %>
+    <% end %>
+  </p>
+
+</div>

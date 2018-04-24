@@ -1,0 +1,220 @@
+<% if current_user.admin? %>
+  <p>
+    <strong>Completed:</strong>
+    <%= @packet.completed %>&emsp;&emsp;
+    <strong>Vendor Completed:</strong>
+    <% if @packet.additional_integer_1 == 1 %>
+      <%= "true" %>&emsp;&emsp;
+    <% else %>
+      <%= "false" %>&emsp;&emsp;
+    <% end %>
+  </p>
+<% else %>
+  <p>
+    <strong>Completed:</strong>
+    <% if @packet.additional_integer_1 == 1 %>
+      <%= "true" %>&emsp;&emsp;
+    <% else %>
+      <%= "false" %>&emsp;&emsp;
+    <% end %>
+    <strong>Products still to complete:</strong> <%= @packet.products.where.not(additional_integer_2: 1).count %>
+<% end %>
+
+<%= render partial: 'static_fields' %>
+<div id="main">
+  <fieldset>
+    <legend><strong>Primary Contact</strong></legend>
+    <p>
+      <strong>Name:</strong>
+      <%= @packet.primary_contact %>&emsp;&emsp;
+      <strong>Office phone:</strong>
+      <%= @packet.phone_1 %>&emsp;&emsp;
+      <strong>Mobile phone:</strong>
+      <%= @packet.phone_2 %>&emsp;&emsp;
+      <strong>Email:</strong>
+      <%= @packet.email %>&emsp;&emsp;
+      <strong>Fax:</strong>
+      <%= @packet.fax %>
+    </p>
+  </fieldset>
+
+  <fieldset>
+    <legend><strong>QA Contact</strong></legend>
+    <p>
+      <strong>Name:</strong>
+      <%= @packet.qa_name %>&emsp;&emsp;
+      <strong>Office phone:</strong>
+      <%= @packet.qa_phone_1 %>&emsp;&emsp;
+      <strong>Mobile phone:</strong>
+      <%= @packet.qa_phone_2 %>&emsp;&emsp;
+      <strong>Email:</strong>
+      <%= @packet.qa_email %>
+    </p>
+  </fieldset>
+
+  <fieldset>
+    <legend><strong>Ops Contact</strong></legend>
+    <p>
+      <strong>Name:</strong>
+      <%= @packet.ops_name %>&emsp;&emsp;
+      <strong>Office phone:</strong>
+      <%= @packet.ops_phone_1 %>&emsp;&emsp;
+      <strong>Mobile phone:</strong>
+      <%= @packet.ops_phone_2 %>&emsp;&emsp;
+      <strong>Email:</strong>
+      <%= @packet.ops_email %>
+    </p>
+  </fieldset>
+
+  <fieldset>
+    <legend><strong>USDA Establishment 1</strong></legend>
+    <p>
+      <strong>Number:</strong>
+      <%= @packet.usda_establishment_number_1 %>&emsp;&emsp;
+      <strong>Name:</strong>
+      <%= @packet.usda_establishment_name_1 %>&emsp;&emsp;
+      <strong>Mock recall SOP:</strong>
+      <%= @packet.mock_recall_sop_1 %>&emsp;&emsp;
+      <strong>Mock recall date:</strong>
+      <%= @packet.mock_recall_date_1 %>&emsp;&emsp;
+      <strong>Recall this year:</strong>
+      <%= @packet.recall_this_year_1 %>&emsp;&emsp;
+      <strong>Recall:</strong>
+      <%= @packet.recall_1 %>&emsp;&emsp;
+      <strong>Bone/Foreign policy:</strong>
+      <%= @packet.bone_foreign_1 %>&emsp;&emsp;
+      <strong>Complaint policy:</strong>
+      <%= @packet.complaint_1 %>&emsp;&emsp;
+    </p>
+    <p>
+      <strong>HACCP certification:</strong>
+      <%= @packet.haccp_1_certificate %>&emsp;&emsp;
+      <strong>Expires:</strong>
+      <%= @packet.haccp_1_expires %>&emsp;&emsp;
+      <strong>Scheduled:</strong>
+      <%= @packet.haccp_1_scheduled %>&emsp;&emsp;
+      <strong>Third party audit:</strong>
+      <%= @packet.problems_2 %>&emsp;&emsp;
+      <strong>Type:</strong>
+      <%= @packet.haccp_1_type %>&emsp;&emsp;
+      <strong>Company:</strong>
+      <%= @packet.haccp_1_company %>&emsp;&emsp;
+      <strong>Score:</strong>
+      <%= @packet.haccp_1_score %>&emsp;&emsp;
+      <strong>Expires:</strong>
+      <%= @packet.additional_string_1 %>&emsp;&emsp;
+      <strong>Scheduled:</strong>
+      <%= @packet.additional_string_2 %>&emsp;&emsp;
+    </p>
+  </fieldset>
+
+  <fieldset>
+    <legend><strong>USDA Establishment 2</strong></legend>
+    <p>
+      <strong>Number:</strong>
+      <%= @packet.usda_establishment_number_2 %>&emsp;&emsp;
+      <strong>Name:</strong>
+      <%= @packet.usda_establishment_name_2 %>&emsp;&emsp;
+      <strong>Mock recall SOP:</strong>
+      <%= @packet.mock_recall_sop_2 %>&emsp;&emsp;
+      <strong>Mock recall date:</strong>
+      <%= @packet.mock_recall_date_2 %>&emsp;&emsp;
+      <strong>Recall this year:</strong>
+      <%= @packet.recall_this_year_2 %>&emsp;&emsp;
+      <strong>Recall:</strong>
+      <%= @packet.recall_2 %>&emsp;&emsp;
+      <strong>Bone/Foreign policy:</strong>
+      <%= @packet.bone_foreign_2 %>&emsp;&emsp;
+      <strong>Complaint policy:</strong>
+      <%= @packet.complaint_2 %>&emsp;&emsp;
+    </p>
+    <p>
+      <strong>HACCP certification:</strong>
+      <%= @packet.haccp_2_certificate %>&emsp;&emsp;
+      <strong>Expires:</strong>
+      <%= @packet.haccp_2_expires %>&emsp;&emsp;
+      <strong>Scheduled:</strong>
+      <%= @packet.haccp_2_scheduled %>&emsp;&emsp;
+      <strong>Third party audit:</strong>
+      <%= @packet.problems_3 %>&emsp;&emsp;
+      <strong>Type:</strong>
+      <%= @packet.haccp_2_type %>&emsp;&emsp;
+      <strong>Company:</strong>
+      <%= @packet.haccp_2_company %>&emsp;&emsp;
+      <strong>Score:</strong>
+      <%= @packet.haccp_2_score %>&emsp;&emsp;
+      <strong>Expires:</strong>
+      <%= @packet.additional_string_3 %>&emsp;&emsp;
+      <strong>Scheduled:</strong>
+      <%= @packet.additional_string_4 %>&emsp;&emsp;
+    </p>
+  </fieldset>
+
+  <fieldset>
+    <legend><strong>USDA Establishment 3</strong></legend>
+    <p>
+      <strong>Number:</strong>
+      <%= @packet.usda_establishment_number_3 %>&emsp;&emsp;
+      <strong>Name:</strong>
+      <%= @packet.usda_establishment_name_3 %>&emsp;&emsp;
+      <strong>Mock recall SOP:</strong>
+      <%= @packet.mock_recall_sop_3 %>&emsp;&emsp;
+      <strong>Mock recall date:</strong>
+      <%= @packet.mock_recall_date_3 %>&emsp;&emsp;
+      <strong>Recall this year:</strong>
+      <%= @packet.recall_this_year_3 %>&emsp;&emsp;
+      <strong>Recall:</strong>
+      <%= @packet.recall_3 %>&emsp;&emsp;
+      <strong>Bone/Foreign policy:</strong>
+      <%= @packet.bone_foreign_3 %>&emsp;&emsp;
+      <strong>Complaint policy:</strong>
+      <%= @packet.complaint_3 %>&emsp;&emsp;
+    </p>
+    <p>
+      <strong>HACCP certification:</strong>
+      <%= @packet.haccp_3_certificate %>&emsp;&emsp;
+      <strong>Expires:</strong>
+      <%= @packet.haccp_3_expires %>&emsp;&emsp;
+      <strong>Scheduled:</strong>
+      <%= @packet.haccp_3_scheduled %>&emsp;&emsp;
+      <strong>Third party audit:</strong>
+      <%= @packet.qa_phone_1_ext %>&emsp;&emsp;
+      <strong>Type:</strong>
+      <%= @packet.haccp_3_type %>&emsp;&emsp;
+      <strong>Company:</strong>
+      <%= @packet.haccp_3_company %>&emsp;&emsp;
+      <strong>Score:</strong>
+      <%= @packet.haccp_3_score %>&emsp;&emsp;
+      <strong>Expires:</strong>
+      <%= @packet.additional_string_5 %>&emsp;&emsp;
+      <strong>Scheduled:</strong>
+      <%= @packet.problems_1 %>&emsp;&emsp;
+    </p>
+  </fieldset>
+  <p>
+    <strong>Website:</strong>
+    <%= @packet.website %>&emsp;&emsp;
+    <strong>Notes:</strong>
+    <%= @packet.notes %>&emsp;&emsp;
+    <strong>Non-disclosure:</strong>
+    <%= @packet.non_disclosure %>&emsp;&emsp;
+    <strong>W9:</strong>
+    <%= @packet.w9 %>&emsp;&emsp;
+    <strong>Guarantee:</strong>
+    <%= @packet.guarantee %>&emsp;&emsp;
+    <strong>Liability:</strong>
+    <%= @packet.liability %>&emsp;&emsp;
+  </p>
+</div>
+
+<% if current_user.admin? %>
+  <button id="btnPrint">Print Preview</button>
+  <br>
+  <br>
+<% end %>
+<%= link_to 'Edit', edit_packet_path(@packet) %>
+<% if current_user.admin? %>
+  <%= link_to 'Packet list', packets_path %>
+<% end %>
+<% link = '/packets/' + @packet.id.to_s + '/products' %>
+<%= link_to 'Product list', link %>

@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Packets</h1>
+
+<table class="mytable" class="display" cellspacing="0" >
+  <thead>
+    <tr>
+      <th>Packet number</th>
+      <th>Vendor number</th>
+      <th>Requested date</th>
+      <th>Due date</th>
+      <th>Completed</th>
+      <th>Company name</th>
+      <th>Show</th>
+      <th>Edit</th>
+      <% if current_user.admin? %>
+        <th>Destroy</th>
+      <% end %>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @packets.each do |packet| %>
+      <tr>
+        <td><%= packet.packet_number %></td>
+        <td><%= packet.vendor_number %></td>
+        <td><%= packet.requested_date %></td>
+        <td><%= packet.due_date %></td>
+        <td><%= packet.completed %></td>
+        <td><%= packet.company_name %></td>
+        <td><%= link_to 'Show', packet %></td>
+        <td><%= link_to 'Edit', edit_packet_path(packet) %></td>
+        <% if current_user.admin? %>
+          <td><%= link_to 'Destroy', packet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if current_user.admin? %>
+  <%= link_to 'New Packet', new_packet_path %>
+<% end %>

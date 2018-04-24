@@ -1,0 +1,94 @@
+<div class="starter-template">
+  <h1>Welcome to Vendor Packets!</h1>
+  <h2>
+    Read and update Vendor Packet records.
+  </h2>
+  <h3>
+    For business/product assistance  - call Lou      at 973-344-0565 ext: 150 louisp@dartagnan.com<br>
+    For technical assistance         - call Sherwood at 973-344-0565 ext: 105 sherwoodl@dartagnan.com<br>
+  </h3>
+  <p>
+    <% if current_user.admin? %>
+      <a href="/packets" class="btn btn-primary">
+        View Packets
+      </a>
+    <% else %>
+      <% link = '/packets/' + current_user.id.to_s + '/edit' %>
+      <%= link_to 'View Packet', link %>
+    <% end %>
+  </p>
+
+  <% if current_user.admin? %>
+    <table class="mytable" class="display" cellspacing="0" >
+      <thead>
+        <tr>
+          <th>Vendor number</th>
+          <th>Approved?</th>
+          <th>Packet complete?</th>
+          <th>Products completed</th>
+          <th>Total products</th>
+          <th>Percentage complete</th>
+          <th>Last sign in</th>
+          <th>Previous sign in</th>
+          <th>Sign in count</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @summaries.each do |s| %>
+          <tr>
+            <td><%= s[:vendor_number] %></td>
+            <td><%= s[:completed] %></td>
+            <td><%= s[:vendor_complete] %></td>
+            <td><%= s[:products_completed] %></td>
+            <td><%= s[:total_products] %></td>
+            <td><%= s[:percentage_complete] %></td>
+            <% if s[:current_sign_in_at] == " " %>
+              <td><%= " " %></td>
+            <% else %>
+              <td><%= display_time(s[:current_sign_in_at]) %></td>
+            <% end %>
+            <% if s[:last_sign_in_at] == " " %>
+              <td><%= " " %></td>
+            <% else %>
+              <td><%= display_time(s[:last_sign_in_at]) %></td>
+            <% end %>
+            <td><%= s[:sign_in_count] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br>
+    <h2>Vendor packets completion percentages</h2>
+    <p id= "percentages" hidden> <%= @percentages %> </p>
+    <p id= "percent0code" hidden> <%= @percent0code %> </p>
+    <p id= "percent0name" hidden> <%= @percent0name %> </p>
+    <p id= "percent0packet" hidden> <%= @percent0packet %> </p>
+    <p id= "percent20code" hidden> <%= @percent20code %> </p>
+    <p id= "percent20name" hidden> <%= @percent20name %> </p>
+    <p id= "percent20packet" hidden> <%= @percent20packet %> </p>
+    <p id= "percent40code" hidden> <%= @percent40code %> </p>
+    <p id= "percent40name" hidden> <%= @percent40name %> </p>
+    <p id= "percent40packet" hidden> <%= @percent40packet %> </p>
+    <p id= "percent60code" hidden> <%= @percent60code %> </p>
+    <p id= "percent60name" hidden> <%= @percent60name %> </p>
+    <p id= "percent60packet" hidden> <%= @percent60packet %> </p>
+    <p id= "percent80code" hidden> <%= @percent80code %> </p>
+    <p id= "percent80name" hidden> <%= @percent80name %> </p>
+    <p id= "percent80packet" hidden> <%= @percent80packet %> </p>
+    <p id= "percent100code" hidden> <%= @percent100code %> </p>
+    <p id= "percent100name" hidden> <%= @percent100name %> </p>
+    <p id= "percent100packet" hidden> <%= @percent100packet %> </p>
+    <div id="pietable" style="float:right; overflow:auto; height:400px">
+    </div>
+    <div id="mypie" style="width:40em;height:30em;text-align:center;margin:0.7em">
+      <div id="flot-piechart" style="width:100%;height:100%;"></div>
+    </div>
+    <br>
+    <h2>Import Initialised Packets</h2>
+      <%= form_tag import_packets_path, multipart: true do %>
+      <%= file_field_tag :file %>
+      <%= submit_tag "Import" %>
+    <% end %>
+  <% end %>
+</div>

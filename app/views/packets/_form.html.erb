@@ -1,0 +1,319 @@
+<%= form_with(model: packet, local: true) do |form| %>
+  <% if packet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(packet.errors.count, "error") %> prevented this packet from being completed:</h2>
+
+      <ul>
+      <% packet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if current_user.admin? %>
+    <div class="field">
+      <!-- The admin decides that the packet is complete -->
+      <%= form.label :completed %>
+      <%= form.check_box :completed, id: :packet_completed %>
+    </div>
+  <% else %>
+  <!-- The vendor can indicate that the packet is complete -->
+    <div class="field">
+      <%= form.label :additional_integer_1, "Completed" %>
+      <%= form.check_box :additional_integer_1, id: :packet_additional_integer_1, title: "Check when all relevant fields have been entered and documents uploaded" %>
+    </div>
+  <% end %>
+
+  <%= render partial: 'static_fields' %>
+
+  <fieldset>
+    <legend><strong>Primary Contact</strong></legend>
+    <p>
+      <table class="field">
+        <thead>
+          <tr>
+            <th> <%= form.label :primary_contact, "Name" %> </th>
+            <th> <%= form.label :phone_1, "Office phone" %> </th>
+            <th> <%= form.label :phone_2, "Mobile phone" %> </th>
+            <th> <%= form.label :email, "Email" %> </th>
+            <th> <%= form.label :fax %> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> <%= form.text_field :primary_contact, id: :packet_primary_contact %> </td>
+            <td> <%= form.text_field :phone_1, id: :packet_phone_1 %> </td>
+            <td> <%= form.text_field :phone_2, id: :packet_phone_2 %> </td>
+            <td> <%= form.text_field :email, id: :packet_email %> </td>
+            <td> <%= form.text_field :fax, id: :packet_fax %> </td>
+          </tr>
+        </tbody>
+      </table>
+    </p>
+  </fieldset>
+
+  <fieldset>
+    <legend><strong>QA Contact</strong></legend>
+    <p>
+      <table class="field">
+        <thead>
+          <tr>
+            <th> <%= form.label :qa_name, "Name" %> </th>
+            <th> <%= form.label :qa_phone_1, "Office phone" %> </th>
+            <th> <%= form.label :qa_phone_2, "Mobile phone" %> </th>
+            <th> <%= form.label :qa_email, "Email" %> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> <%= form.text_field :qa_name, id: :packet_qa_name %> </td>
+            <td> <%= form.text_field :qa_phone_1, id: :packet_qa_phone_1 %> </td>
+            <td> <%= form.text_field :qa_phone_2, id: :packet_qa_phone_2 %> </td>
+            <td> <%= form.text_field :qa_email, id: :packet_qa_email %> </td>
+          </tr>
+        </tbody>
+      </table>
+    </p>
+  </fieldset>
+
+  <fieldset>
+    <legend><strong>Ops Contact</strong></legend>
+    <p>
+      <table class="field">
+        <thead>
+          <tr>
+            <th> <%= form.label :ops_name, "Name" %> </th>
+            <th> <%= form.label :ops_phone_1, "Office phone" %> </th>
+            <th> <%= form.label :ops_phone_2, "Mobile phone" %> </th>
+            <th> <%= form.label :ops_email, "Email" %> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> <%= form.text_field :ops_name, id: :packet_ops_name %> </td>
+            <td> <%= form.text_field :ops_phone_1, id: :packet_ops_phone_1 %> </td>
+            <td> <%= form.text_field :ops_phone_2, id: :packet_ops_phone_2 %> </td>
+            <td> <%= form.text_field :ops_email, id: :packet_ops_email %> </td>
+          </tr>
+        </tbody>
+      </table>
+    </p>
+  </fieldset>
+
+  <fieldset>
+    <legend><strong>USDA Establishment 1</strong></legend>
+    <p>
+      <table class="field">
+        <thead>
+          <tr>
+            <th> <%= form.label :usda_establishment_number_1, "Number" %> </th>
+            <th> <%= form.label :usda_establishment_name_1, "Name" %> </th>
+            <th> <%= form.label :mock_recall_sop_1, "Mock recall sop" %> </th>
+            <th> <%= form.label :mock_recall_date_1, "Mock recall date" %> </th>
+            <th> <%= form.label :recall_this_year_1, "Recall this year" %> </th>
+            <th> <%= form.label :recall_1, "Recall" %> </th>
+            <th> <%= form.label :bone_foreign_1, "Bone and foreign" %> </th>
+            <th> <%= form.label :complaint_1, "Complaint" %> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> <%= form.text_field :usda_establishment_number_1, id: :packet_usda_establishment_number_1, title: "The USDA number as it appears on the mark of inspection on the label" %> </td>
+            <td> <%= form.text_field :usda_establishment_name_1, id: :packet_usda_establishment_name_1, title: "Official USDA name for the establishment" %> </td>
+            <td> <%= form.text_field :mock_recall_sop_1, id: :packet_mock_recall_sop_1 %> </td>
+            <td> <%= form.date_select :mock_recall_date_1, id: :packet_mock_recall_date_1 %> </td>
+            <td> <%= form.check_box :recall_this_year_1, id: :packet_recall_this_year_1, title: "Only check if a recall occured in the last 12 months" %> </td>
+            <td> <%= form.text_field :recall_1, id: :packet_recall_1, placeholder: "Document upload ref.", title: "Details of the reasons for the recall" %> </td>
+            <td> <%= form.text_field :bone_foreign_1, id: :packet_bone_foreign_1, placeholder: "Document upload ref.", title: "Copy of the bone and foreign object policy" %> </td>
+            <td> <%= form.text_field :complaint_1, id: :packet_complaint_1, placeholder: "Document upload ref.", title: "Copy of the complaint policy" %> </td>
+          </tr>
+        </tbody>
+      </table>
+    </p>
+    <p>
+      <table class="field">
+        <thead>
+          <tr>
+            <th> <%= form.label :haccp_1_certificate, "HACCP certification" %> </th>
+            <th> <%= form.label :haccp_1_expires, "Expires" %> </th>
+            <th> <%= form.label :haccp_1_scheduled, "Scheduled" %> </th>
+            <th> <%= form.label :problems_2, "Third party audit" %> </th>
+            <th> <%= form.label :haccp_1_type, "Type" %> </th>
+            <th> <%= form.label :haccp_1_company, "Company" %> </th>
+            <th> <%= form.label :haccp_1_score, "Score" %> </th>
+            <th> <%= form.label :additional_string_1, "Expires" %> </th>
+            <th> <%= form.label :additional_string_2, "Scheduled" %> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> <%= form.text_field :haccp_1_certificate, id: :packet_haccp_1_certificate, placeholder: "Document upload ref.", title: "Copy of the current HACCP certificate" %> </td>
+            <td> <%= form.date_select :haccp_1_expires, id: :packet_haccp_1_expires, title: "Date HACCP certification expires" %> </td>
+            <td> <%= form.date_select :haccp_1_scheduled, id: :packet_haccp_1_scheduled, title: "Date next HACCP certification is scheduled" %> </td>
+            <td> <%= form.text_field :problems_2, id: :packet_problems_2 %> </td>
+            <td> <%= form.text_field :haccp_1_type, id: :packet_haccp_1_type %> </td>
+            <td> <%= form.text_field :haccp_1_company, id: :packet_haccp_1_company, title: "Name of third party audit company" %> </td>
+            <td> <%= form.text_field :haccp_1_score, id: :packet_haccp_1_score, title: "Score recieved in last third party audit" %> </td>
+            <td> <%= form.text_field :additional_string_1, id: :packet_additional_string_1, title: "Date third party audit expires" %> </td>
+            <td> <%= form.text_field :additional_string_2, id: :packet_additional_string_2, title: "Date next third party audit is scheduled" %> </td>
+          </tr>
+        </tbody>
+      </table>
+    </p>
+    <input type="checkbox" id="fadetoggle1" title="Check to enter another USDA establishment">2nd USDA establishment?<br>
+  </fieldset>
+
+
+  <fieldset id="usda2", hidden>
+    <legend><strong>USDA Establishment 2</strong></legend>
+    <p>
+      <table class="field">
+        <thead>
+          <tr>
+            <th> <%= form.label :usda_establishment_number_2, "Number" %> </th>
+            <th> <%= form.label :usda_establishment_name_2, "Name" %> </th>
+            <th> <%= form.label :mock_recall_sop_2, "Mock recall sop" %> </th>
+            <th> <%= form.label :mock_recall_date_2, "Mock recall date" %> </th>
+            <th> <%= form.label :recall_this_year_2, "Recall this year" %> </th>
+            <th> <%= form.label :recall_2, "Recall" %> </th>
+            <th> <%= form.label :bone_foreign_2, "Bone and foreign" %> </th>
+            <th> <%= form.label :complaint_2, "Complaint" %> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> <%= form.text_field :usda_establishment_number_2, id: :packet_usda_establishment_number_2 %> </td>
+            <td> <%= form.text_field :usda_establishment_name_2, id: :packet_usda_establishment_name_2 %> </td>
+            <td> <%= form.text_field :mock_recall_sop_2, id: :packet_mock_recall_sop_2 %> </td>
+            <td> <%= form.date_select :mock_recall_date_2, id: :packet_mock_recall_date_2 %> </td>
+            <td> <%= form.check_box :recall_this_year_2, id: :packet_recall_this_year_2 %> </td>
+            <td> <%= form.text_field :recall_2, id: :packet_recall_2, placeholder: "Document upload ref." %> </td>
+            <td> <%= form.text_field :bone_foreign_2, id: :packet_bone_foreign_2, placeholder: "Document upload ref." %> </td>
+            <td> <%= form.text_field :complaint_2, id: :packet_complaint_2, placeholder: "Document upload ref." %> </td>
+          </tr>
+        </tbody>
+      </table>
+    </p>
+    <p>
+      <table class="field">
+        <thead>
+          <tr>
+            <th> <%= form.label :haccp_2_certificate, "HACCP certification" %> </th>
+            <th> <%= form.label :haccp_2_expires, "Expires" %> </th>
+            <th> <%= form.label :haccp_2_scheduled, "Scheduled" %> </th>
+            <th> <%= form.label :problems_3, "Third party audit" %> </th>
+            <th> <%= form.label :haccp_2_type, "Type" %> </th>
+            <th> <%= form.label :haccp_2_company, "Company" %> </th>
+            <th> <%= form.label :haccp_2_score, "Score" %> </th>
+            <th> <%= form.label :additional_string_3, "Expires" %> </th>
+            <th> <%= form.label :additional_string_4, "Scheduled" %> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> <%= form.text_field :haccp_2_certificate, id: :packet_haccp_2_certificate, placeholder: "Document upload ref." %> </td>
+            <td> <%= form.date_select :haccp_2_expires, id: :packet_haccp_2_expires %> </td>
+            <td> <%= form.date_select :haccp_2_scheduled, id: :packet_haccp_2_scheduled %> </td>
+            <td> <%= form.text_field :problems_3, id: :packet_problems_3 %> </td>
+            <td> <%= form.text_field :haccp_2_type, id: :packet_haccp_2_type %> </td>
+            <td> <%= form.text_field :haccp_2_company, id: :packet_haccp_2_company %> </td>
+            <td> <%= form.text_field :haccp_2_score, id: :packet_haccp_2_score %> </td>
+            <td> <%= form.text_field :additional_string_3, id: :packet_additional_string_3 %> </td>
+            <td> <%= form.text_field :additional_string_4, id: :packet_additional_string_4 %>  </td>
+          </tr>
+        </tbody>
+      </table>
+    </p>
+    <input type="checkbox" id="fadetoggle2" value="2" title="Check to enter another USDA establishment">3rd USDA establishment?<br>
+  </fieldset>
+
+  <fieldset id="usda3", hidden>
+    <legend><strong>USDA Establishment 3</strong></legend>
+    <p>
+      <table class="field">
+        <thead>
+          <tr>
+            <th> <%= form.label :usda_establishment_number_3, "Number" %> </th>
+            <th> <%= form.label :usda_establishment_name_3, "Name" %> </th>
+            <th> <%= form.label :mock_recall_sop_3, "Mock recall sop" %> </th>
+            <th> <%= form.label :mock_recall_date_3, "Mock recall date" %> </th>
+            <th> <%= form.label :recall_this_year_3, "Recall this year" %> </th>
+            <th> <%= form.label :recall_3, "Recall" %> </th>
+            <th> <%= form.label :bone_foreign_3, "Bone and foreign" %> </th>
+            <th> <%= form.label :complaint_3, "Complaint" %> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> <%= form.text_field :usda_establishment_number_3, id: :packet_usda_establishment_number_3 %> </td>
+            <td> <%= form.text_field :usda_establishment_name_3, id: :packet_usda_establishment_name_3 %> </td>
+            <td> <%= form.text_field :mock_recall_sop_3, id: :packet_mock_recall_sop_3 %> </td>
+            <td> <%= form.date_select :mock_recall_date_3, id: :packet_mock_recall_date_3 %> </td>
+            <td> <%= form.check_box :recall_this_year_3, id: :packet_recall_this_year_3 %> </td>
+            <td> <%= form.text_field :recall_3, id: :packet_recall_3, placeholder: "Document upload ref." %> </td>
+            <td> <%= form.text_field :bone_foreign_3, id: :packet_bone_foreign_3, placeholder: "Document upload ref." %> </td>
+            <td> <%= form.text_field :complaint_3, id: :packet_complaint_3, placeholder: "Document upload ref." %> </td>
+          </tr>
+        </tbody>
+      </table>
+    </p>
+    <p>
+      <table class="field">
+        <thead>
+          <tr>
+            <th> <%= form.label :haccp_3_certificate, "HACCP certification" %> </th>
+            <th> <%= form.label :haccp_3_expires, "Expires" %> </th>
+            <th> <%= form.label :haccp_3_scheduled, "Scheduled" %> </th>
+            <th> <%= form.label :qa_phone_1_ext, "Third party audit" %> </th>
+            <th> <%= form.label :haccp_3_type, "Type" %> </th>
+            <th> <%= form.label :haccp_3_company, "Company" %> </th>
+            <th> <%= form.label :haccp_3_score, "Score" %> </th>
+            <th> <%= form.label :additional_string_5, "Expires" %> </th>
+            <th> <%= form.label :problems_1, "Scheduled" %> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> <%= form.text_field :haccp_3_certificate, id: :packet_haccp_3_certificate, placeholder: "Document upload ref." %> </td>
+            <td> <%= form.date_select :haccp_3_expires, id: :packet_haccp_3_expires %> </td>
+            <td> <%= form.date_select :haccp_3_scheduled, id: :packet_haccp_3_scheduled %> </td>
+            <td> <%= form.text_field :qa_phone_1_ext, id: :packet_qa_phone_1_ext %> </td>
+            <td> <%= form.text_field :haccp_3_type, id: :packet_haccp_3_type %> </td>
+            <td> <%= form.text_field :haccp_3_company, id: :packet_haccp_3_company %> </td>
+            <td> <%= form.text_field :haccp_3_score, id: :packet_haccp_3_score %> </td>
+            <td> <%= form.text_field :additional_string_5, id: :packet_additional_string_5 %> </td>
+            <td> <%= form.text_field :problems_1, id: :packet_problems_1 %> </td>
+          </tr>
+        </tbody>
+      </table>
+    </p>
+  </fieldset>
+
+  <table class="field">
+    <thead>
+      <tr>
+        <th> <%= form.label :website %> </th>
+        <th> <%= form.label :notes %> </th>
+        <th> <%= form.label :non_disclosure %> </th>
+        <th> <%= form.label :w9 %> </th>
+        <th> <%= form.label :guarantee %> </th>
+        <th> <%= form.label :liability %> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td> <%= form.text_field :website, id: :packet_website, title: "The URL of your company's website" %> </td>
+        <td> <%= form.text_field :notes, id: :packet_notes, placeholder: "Document upload ref.", title: "Any additional information you wish to upload" %> </td>
+        <td> <%= form.text_field :non_disclosure, id: :packet_non_disclosure, placeholder: "Document upload ref.", title: "Signed non disclosure agreement" %> </td>
+        <td> <%= form.text_field :w9, id: :packet_w9, placeholder: "Document upload ref.", title: "A blank copy of the form can be obtained at https://www.irs.gov/pub/irs-pdf/fw9.pdf" %> </td>
+        <td> <%= form.text_field :guarantee, id: :packet_guarantee, placeholder: "Document upload ref." %> </td>
+        <td> <%= form.text_field :liability, id: :packet_liability, placeholder: "Document upload ref.", title: "Copy of liability insurance certificate" %> </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

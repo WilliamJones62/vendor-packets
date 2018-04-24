@@ -1,0 +1,338 @@
+<%= form_with(model: product, url: [@packet, @product], local: true) do |form| %>
+  <% if product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product.errors.count, "error") %> prevented this product from being completed:</h2>
+
+      <ul>
+      <% product.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<!-- The vendor can indicate that the product is complete -->
+  <table class="field">
+    <thead>
+      <tr>
+        <th><%= form.label :additional_integer_2, "Completed" %></th>
+        <th><%= form.label :additional_string_1, "Copy from" %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= form.check_box :additional_integer_2, id: :product_additional_integer_2, title: "Check when all relevant fields have been entered and documents uploaded" %></td>
+        <% options = options_from_collection_for_select(@products, 'product_code', 'product_code') %>
+        <td><%= form.select :additional_string_1,  options, include_blank: true %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    <strong>Packet number:</strong>
+    <%= @packet.packet_number %>&emsp;&emsp;
+    <strong>Product code:</strong>
+    <%= @product.product_code %>&emsp;&emsp;
+    <strong>Product description:</strong>
+    <%= @product.product_name %>&emsp;&emsp;
+  </p>
+
+  <table class="field">
+    <thead>
+      <tr>
+        <th> <%= form.label :species, "Species/Breed" %> </th>
+        <th> <%= form.label :vendor_code %> </th>
+        <th> <%= form.label :vendor_name, "Vendor description" %> </th>
+        <th> <%= form.label :product_photo %> </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td> <%= form.text_field :species, id: :product_species %> </td>
+        <td> <%= form.text_field :vendor_code, id: :product_vendor_code, title: "Your code for this product" %> </td>
+        <td> <%= form.text_field :vendor_name, id: :product_vendor_name, title: "Your description for this product" %> </td>
+        <td> <%= form.text_field :product_photo, id: :product_product_photo, placeholder: "Document upload ref.", title: "Your photographs of this product" %> </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <% if @product.case_piece %>
+    <fieldset>
+      <legend><strong>Box</strong></legend>
+      <p>
+        <table class="field">
+          <thead>
+            <tr>
+              <th> <%= form.label :box_type, "Type" %> </th>
+              <th> <%= form.label :box_details, "Details" %> </th>
+              <th> <%= form.label :box_units, "Units" %> </th>
+              <th> <%= form.label :box_length, "Length" %> </th>
+              <th> <%= form.label :box_width, "Width" %> </th>
+              <th> <%= form.label :box_height, "Height" %> </th>
+              <th> <%= form.label :box_count, "Pieces per box" %> </th>
+              <th> <%= form.label :piece_count, "Items per piece" %> </th>
+              <th> <%= form.label :package_photo, "Photo" %> </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td> <%= form.text_field :box_type, id: :product_box_type, title: "'Dartagnan' or 'Own'" %> </td>
+              <td> <%= form.text_field :box_details, id: :product_box_details %> </td>
+              <td> <%= form.text_field :box_units, id: :product_box_units, title: "Unit of measure for box dimensions e.g. inches, cm" %> </td>
+              <td> <%= form.number_field :box_length, id: :product_box_length %> </td>
+              <td> <%= form.number_field :box_width, id: :product_box_width %> </td>
+              <td> <%= form.number_field :box_height, id: :product_box_height %> </td>
+              <td> <%= form.number_field :box_count, id: :product_box_count, title: "Number of pieces per box" %> </td>
+              <td> <%= form.number_field :piece_count, id: :product_piece_count, title: "Number of items per piece" %> </td>
+              <td> <%= form.text_field :package_photo, id: :product_package_photo, placeholder: "Document upload ref.", title: "Your photographs of the box" %> </td>
+            </tr>
+          </tbody>
+        </table>
+      </p>
+    </fieldset>
+  <% else %>
+    <fieldset>
+      <legend><strong>Piece</strong></legend>
+      <p>
+        <table class="field">
+          <thead>
+            <tr>
+              <th> <%= form.label :piece_box, "Box" %> </th>
+              <th> <%= form.label :piece_pack, "Pack" %> </th>
+              <th> <%= form.label :piece_count, "Items_per_piece" %> </th>
+              <th> <%= form.label :package_photo, "Photo" %> </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td> <%= form.text_field :piece_pack, id: :product_piece_pack %> </td>
+              <td> <%= form.check_box :piece_box, id: :product_piece_box %> </td>
+              <td> <%= form.number_field :piece_count, id: :product_piece_count, title: "Number of pieces per package" %> </td>
+              <td> <%= form.text_field :package_photo, id: :product_package_photo, placeholder: "Document upload ref.", title: "Your photographs of the package" %> </td>
+            </tr>
+          </tbody>
+        </table>
+      </p>
+    </fieldset>
+  <% end %>
+
+  <fieldset>
+    <legend><strong>Label</strong></legend>
+    <p>
+      <table class="field">
+        <thead>
+          <tr>
+            <th> <%= form.label :label_type, "Type" %> </th>
+            <th> <%= form.label :label_details, "Details" %> </th>
+            <th> <%= form.label :label, "Documentation" %> </th>
+            <th> <%= form.label :safe, "Safe handling" %> </th>
+            <th> <%= form.label :additional_integer_1, "bug" %> </th>
+            <th> <%= form.label :bug, "Documentation" %> </th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> <%= form.text_field :label_type, id: :product_label_type, title: "'Dartagnan' or 'Own'" %> </td>
+            <td> <%= form.text_field :label_details, id: :product_label_details %> </td>
+            <td> <%= form.text_field :label, id: :product_label, placeholder: "Document upload ref.", title: "Your photographs of the label" %> </td>
+            <td> <%= form.text_field :safe, id: :product_safe, placeholder: "Document upload ref.", title: "Copy of safe handling instructions" %> </td>
+            <td> <%= form.check_box :additional_integer_1, id: :product_additional_integer_1 %> </td>
+            <td> <%= form.text_field :bug, id: :product_bug, placeholder: "Document upload ref.", title: "Copy of USDA bug" %> </td>
+          </tr>
+        </tbody>
+      </table>
+     </p>
+  </fieldset>
+
+  <fieldset>
+    <legend><strong>Weight</strong></legend>
+    <p>
+      <table class="field">
+        <thead>
+          <tr>
+            <th> <%= form.label :weight_units, "Units" %> </th>
+            <th> <%= form.label :weight_max, "Max" %> </th>
+            <th> <%= form.label :weight_min, "Min" %> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> <%= form.text_field :weight_units, id: :product_weight_units, title: "Unit of measure for weight of the package e.g. Lb, Kg" %> </td>
+            <td> <%= form.number_field :weight_max, id: :product_weight_max, step: :any %> </td>
+            <td> <%= form.number_field :weight_min, id: :product_weight_min, step: :any %> </td>
+          </tr>
+        </tbody>
+      </table>
+    </p>
+  </fieldset>
+
+  <fieldset>
+    <legend><strong>Pallet</strong></legend>
+    <p>
+      <table class="field">
+        <thead>
+          <tr>
+            <th> <%= form.label :pallet_layers, "Number of layers" %> </th>
+            <th> <%= form.label :pallet_count_per_layer, "Count per layer" %> </th>
+            <th> <%= form.label :pallet_length, "Length" %> </th>
+            <th> <%= form.label :pallet_width, "Width" %> </th>
+            <th> <%= form.label :pallet_height, "Height" %> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> <%= form.number_field :pallet_layers, id: :product_pallet_layers, title: "How many layers are on a pallet" %> </td>
+            <td> <%= form.number_field :pallet_count_per_layer, id: :product_pallet_count_per_layer, title: "How many boxes are in a layer" %> </td>
+            <td> <%= form.number_field :pallet_length, id: :product_pallet_length %> </td>
+            <td> <%= form.number_field :pallet_width, id: :product_pallet_width %> </td>
+            <td> <%= form.number_field :pallet_height, id: :product_pallet_height %> </td>
+          </tr>
+        </tbody>
+      </table>
+    </p>
+  </fieldset>
+
+  <fieldset>
+    <legend><strong>Claims</strong></legend>
+    <p>
+      <strong>Antibiotic free</strong><br>
+      <table class="field">
+        <thead>
+          <tr>
+            <th> <%= form.label :never, "Never ever" %> </th>
+            <th> <%= form.label :withdrawal %> </th>
+            <th> <%= form.label :withdrawal_days, "Number of days" %> </th>
+            <th> <%= form.label :never_doc, "Documentation" %> </th>
+            <th> <%= form.label :gmo_free, "GMO free" %> </th>
+            <th> <%= form.label :gmo_free_doc, "Documentation" %> </th>
+            <th> <%= form.label :organic, "Organic certification" %> </th>
+            <th> <%= form.label :organic_doc, "Documentation" %> </th>
+            <th> <%= form.label :vaccinated %> </th>
+            <th> <%= form.label :vaccinated_age %> </th>
+            <th> <%= form.label :vaccinated_doc, "Documentation" %> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> <%= form.check_box :never, id: :product_never, title: "Check if claiming antibiotics never used" %> </td>
+            <td> <%= form.check_box :withdrawal, id: :product_withdrawal, title: "Check if claiming antibiotics withdrawn before harvest" %> </td>
+            <td> <%= form.number_field :withdrawal_days, id: :product_withdrawal_days, title: "Number of days antibiotics withdrawn before harvest" %> </td>
+            <td> <%= form.text_field :never_doc, id: :product_never_doc, placeholder: "Document upload ref.", title: "Documentation supporting antibiotics claim" %> </td>
+            <td> <%= form.check_box :gmo_free, id: :product_gmo_free, title: "Check if claiming product is GMO free" %> </td>
+            <td> <%= form.text_field :gmo_free_doc, id: :product_gmo_free_doc, placeholder: "Document upload ref.", title: "Documentation supporting GMO free claim" %> </td>
+            <td> <%= form.check_box :organic, id: :product_organic, title: "Check if claiming product is organic" %> </td>
+            <td> <%= form.text_field :organic_doc, id: :product_organic_doc, placeholder: "Document upload ref.", title: "Documentation supporting organic claim" %> </td>
+            <td> <%= form.check_box :vaccinated, id: :product_vaccinated, title: "Check if claiming vaccination" %> </td>
+            <td> <%= form.number_field :vaccinated_age, id: :product_vaccinated_age, title: "Age at vaccination" %> </td>
+            <td> <%= form.text_field :vaccinated_doc, id: :product_vaccinated_doc, placeholder: "Document upload ref.", title: "Documentation supporting vaccination claim" %> </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="field">
+      <thead>
+        <tr>
+          <th> <%= form.label :humane, "Humanely raised certification" %> </th>
+          <th> <%= form.label :humane_doc, "Documentation" %> </th>
+          <th> <%= form.label :traceable, "Traceability to farm" %> </th>
+          <th> <%= form.label :traceable_doc, "Documentation" %> </th>
+          <th> <%= form.label :sqft_inside %> </th>
+          <th> <%= form.label :sqft_outside %> </th>
+          <th> <%= form.label :sqft_total %> </th>
+          <th> <%= form.label :sqft_doc, "Documentation" %> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> <%= form.check_box :humane, id: :product_humane, title: "Check if claiming product is humanely raised" %> </td>
+          <td> <%= form.text_field :humane_doc, id: :product_humane_doc, placeholder: "Document upload ref.", title: "Documentation supporting humanely raised claim" %> </td>
+          <td> <%= form.check_box :traceable, id: :product_traceable, title: "Check if claiming product is traceable to the farm" %> </td>
+          <td> <%= form.text_field :traceable_doc, id: :product_traceable_doc, placeholder: "Document upload ref.", title: "Documentation supporting traceability claim" %> </td>
+          <td> <%= form.number_field :sqft_inside, id: :product_sqft_inside, title: "Square feet of inside space per animal" %> </td>
+          <td> <%= form.number_field :sqft_outside, id: :product_sqft_outside, title: "Square feet of outside space per animal" %> </td>
+          <td> <%= form.number_field :sqft_total, id: :product_sqft_total, title: "Total square feet of space per animal" %> </td>
+          <td> <%= form.text_field :sqft_doc, id: :product_sqft_doc, placeholder: "Document upload ref.", title: "Documentation supporting space per animal claim" %> </td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="field">
+      <thead>
+        <tr>
+          <th> <%= form.label :pastured %> </th>
+          <th> <%= form.label :pastured_doc, "Documentation" %> </th>
+          <th> <%= form.label :omega3 %> </th>
+          <th> <%= form.label :omega3_doc, "Documentation" %> </th>
+          <th> <%= form.label :vegetable, "Vegetable fed" %> </th>
+          <th> <%= form.label :vegetable_doc, "Documentation" %> </th>
+          <th> <%= form.label :additional_integer_3, "Other claims" %> </th>
+          <th> <%= form.label :other_doc, "Documentation" %> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> <%= form.check_box :pastured, id: :product_pastured, title: "Check if claiming animal is pasture raised" %> </td>
+          <td> <%= form.text_field :pastured_doc, id: :product_pasture_doc, placeholder: "Document upload ref.", title: "Documentation supporting pasture raised claim" %> </td>
+          <td> <%= form.check_box :omega3, id: :product_omega3, title: "Check if claiming omega3" %> </td>
+          <td> <%= form.text_field :omega3_doc, id: :product_omega3_doc, placeholder: "Document upload ref.", title: "Documentation supporting omega3 claim" %> </td>
+          <td> <%= form.check_box :vegetable, id: :product_vegetable, title: "Check if claiming animal is vegetable fed" %> </td>
+          <td> <%= form.text_field :vegetable_doc, id: :product_vegetable_doc, placeholder: "Document upload ref.", title: "Documentation supporting vegetable fed claim" %> </td>
+          <td> <%= form.check_box :additional_integer_3, id: :product_additional_integer_3, title: "Check if making another claim" %> </td>
+          <td> <%= form.text_field :other_doc, id: :product_other_doc, placeholder: "Document upload ref.", title: "Documentation supporting another claim" %> </td>
+        </tr>
+      </tbody>
+    </table>
+    </p>
+  </fieldset>
+
+  <fieldset>
+    <legend><strong>Storage</strong></legend>
+    <p>
+      <table class="field">
+        <thead>
+          <tr>
+            <th> <%= form.label :production_date, "Production date location format" %> </th>
+            <th> <%= form.label :prod_to_receipt, "Production to receipt days" %> </th>
+            <th> <%= form.label :shelf_life, "Shelf life days" %> </th>
+            <th> <%= form.label :storage_temp %> </th>
+            <th> <%= form.label :microbe, "Microbiological support" %> </th>
+            <th> <%= form.label :physical, "Physical sensory study support" %> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> <%= form.text_field :production_date, id: :product_production_date %> </td>
+            <td> <%= form.number_field :prod_to_receipt, id: :product_prod_to_receipt %> </td>
+            <td> <%= form.number_field :shelf_life, id: :product_shelf_life %> </td>
+            <td> <%= form.number_field :storage_temp, id: :product_storage_temp %> </td>
+            <td> <%= form.text_field :microbe, id: :product_microbe, placeholder: "Document upload ref.", title: "Documentation of microbiological support" %> </td>
+            <td> <%= form.text_field :physical, id: :product_physical, placeholder: "Document upload ref.", title: "Documentation of physical sensory study support" %> </td>
+          </tr>
+        </tbody>
+      </table>
+    </p>
+  </fieldset>
+
+  <fieldset>
+    <legend><strong>Other</strong></legend>
+    <p>
+      <table class="field">
+        <thead>
+          <tr>
+            <th> <%= form.label :vendor_spec, "Vendor specification" %> </th>
+            <th> <%= form.label :usda_approve, "USDA approval" %> </th>
+            <th> <%= form.label :allergens %> </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td> <%= form.text_field :vendor_spec, id: :product_vendor_spec, placeholder: "Document upload ref.", title: "Copy of your product specification" %> </td>
+            <td> <%= form.text_field :usda_approve, id: :product_usda_approve, placeholder: "Document upload ref.", title: "Copy of the USDA approval documentation" %> </td>
+            <td> <%= form.text_field :allergens, id: :product_allergens, placeholder: "Document upload ref.", title: "Copy of allergen details documentation" %> </td>
+        </tbody>
+      </table>
+    </p>
+  </fieldset>
+  <br>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

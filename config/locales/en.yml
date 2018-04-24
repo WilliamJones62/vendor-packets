@@ -1,0 +1,68 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  activerecord:
+    attributes:
+      packet:
+        primary_contact: "Primary contact name"
+        phone_1: "Primary contact office phone"
+        email: "Primary contact email"
+        qa_phone_1: "Qa office phone"
+        ops_phone_1: "Ops office phone"
+        additional_string_1: "Audit expires 1"
+        additional_string_2: "Audit scheduled 1"
+        additional_string_3: "Audit expires 2"
+        additional_string_4: "Audit scheduled 2"
+        additional_string_5: "Audit expires 3"
+        problems_1: "Audit scheduled 3"
+        problems_2: "Audit 1"
+        problems_3: "Audit 2"
+        qa_phone_1_ext: "Audit 3"
+      product:
+        species: "Species/Breed"
+        vendor_name: "Vendor description"
+        label: "Label documentation"
+        safe: "Safe handling"
+        production_to_receipt_days: "Max days production to receipt"
+        never_doc: "Antibiotic free documentation"
+        usda_approve: "USDA approval"
+        gmo_free_doc: "GMO free documentation"
+        organic_doc: "Organic certification documentation"
+        vaccinated_doc: "Vaccinated documentation"
+        humane_doc: "Humanely raised certification documentation"
+        traceable_doc: "Traceability to farm documentation"
+        sqft_doc: "SqFt documentation"
+        pastured_doc: "Pastured documentation"
+        omega3_doc: "Omega3 documentation"
+        vegetable_doc: "Vegetable fed documentation"
+        other_doc: "Other claims documentation"
+        additional_string_1: "Copy from"

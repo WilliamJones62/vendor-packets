@@ -1,0 +1,17 @@
+<div class="starter-template">
+  <img src="/assets/explorer1.PNG" alt="Explorer 1" height="900" width="900"><br>
+  <img src="/assets/explorer2.PNG" alt="Explorer 2" height="900" width="900"><br>
+  <img src="/assets/filezilla1.PNG" alt="Filezilla 1" height="900" width="900"><br>
+  <img src="/assets/filezilla2.PNG" alt="Filezilla 2" height="900" width="900"><br>
+  <p>
+    <% if current_user.admin? %>
+      <a href="/packets" class="btn btn-primary">
+        View Packets
+      </a>
+    <% else %>
+      <% link = '/packets/' + current_user.id.to_s + '/edit' %>
+      <%= link_to 'View Packet', link %>
+    <% end %>
+  </p>
+
+</div>

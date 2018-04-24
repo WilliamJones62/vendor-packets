@@ -1,0 +1,7 @@
+<h1>Editing Product</h1>
+<%= render 'form', product: @product %>
+
+<%= link_to 'Show', packet_product_path(@packet, @product) %>
+<%= link_to 'Product list', packet_products_path %>
+<% link = '/packets/' + @packet.id.to_s %>
+<%= link_to 'Show Packet', link %>

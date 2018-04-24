@@ -1,0 +1,29 @@
+<div class="starter-template">
+  <h1>Vendors With No Packet Activity</h1>
+  <p>
+    <% if current_user.admin? %>
+      <a href="/packets" class="btn btn-primary">
+        View Packets
+      </a>
+      <table class="mytable" class="display" cellspacing="0" >
+        <thead>
+          <tr>
+            <th>Vendor number</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @packets.each do |packet| %>
+            <tr>
+              <td><%= packet.vendor_number %></td>
+              <td><%= packet.company_name %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <% link = '/packets/' + current_user.id.to_s + '/edit' %>
+      <%= link_to 'View Packet', link %>
+    <% end %>
+  </p>

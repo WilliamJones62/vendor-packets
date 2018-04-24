@@ -1,0 +1,226 @@
+<strong>Completed:</strong>
+  <% if @product.additional_integer_2 == 1 %>
+    <%= "true" %>
+  <% else %>
+    <%= "false" %>
+  <% end %>
+
+<p>
+  <strong>Packet number:</strong>
+  <%= @packet.packet_number %>
+</p>
+
+<div id="main">
+  <p>
+    <strong>Species/Breed:</strong>
+    <%= @product.species %>&emsp;&emsp;
+    <strong>Product code:</strong>
+    <%= @product.product_code %>&emsp;&emsp;
+    <strong>Product description:</strong>
+    <%= @product.product_name %>&emsp;&emsp;
+    <strong>Vendor code:</strong>
+    <%= @product.vendor_code %>&emsp;&emsp;
+    <strong>Vendor description:</strong>
+    <%= @product.vendor_name %>&emsp;&emsp;
+    <strong>Product photo:</strong>
+    <%= @product.product_photo %>
+  </p>
+
+  <% if @product.case_piece %>
+    <fieldset>
+      <legend><strong>Box</strong></legend>
+      <p>
+        <strong>Type:</strong>
+        <%= @product.box_type %>&emsp;&emsp;
+        <strong>Details:</strong>
+        <%= @product.box_details %>&emsp;&emsp;
+        <strong>Units:</strong>
+        <%= @product.box_units %>&emsp;&emsp;
+        <strong>Length:</strong>
+        <%= @product.box_length %>&emsp;&emsp;
+        <strong>Width:</strong>
+        <%= @product.box_width %>&emsp;&emsp;
+        <strong>Height:</strong>
+        <%= @product.box_height %>&emsp;&emsp;
+        <strong>Pieces per box:</strong>
+        <%= @product.box_count %>&emsp;&emsp;
+        <strong>Items per piece:</strong>
+        <%= @product.piece_count %>&emsp;&emsp;
+        <strong>Photo:</strong>
+        <%= @product.package_photo %>
+      </p>
+    </fieldset>
+  <% else %>
+    <fieldset>
+      <legend><strong>Piece</strong></legend>
+      <p>
+        <strong>Box:</strong>
+        <%= @product.piece_pack %>&emsp;&emsp;
+        <strong>Pack:</strong>
+        <%= @product.piece_box %>&emsp;&emsp;
+        <strong>Items per piece:</strong>
+        <%= @product.piece_count %>&emsp;&emsp;
+        <strong>Photo:</strong>
+        <%= @product.package_photo %>
+      </p>
+    </fieldset>
+  <% end %>
+
+  <fieldset>
+    <legend><strong>Label</strong></legend>
+    <p>
+      <strong>Type:</strong>
+      <%= @product.label_type %>&emsp;&emsp;
+      <strong>Details:</strong>
+      <%= @product.label_details %>&emsp;&emsp;
+      <strong>Documentation:</strong>
+      <%= @product.label %>&emsp;&emsp;
+      <strong>Safe handling:</strong>
+      <%= @product.safe %>&emsp;&emsp;
+      <strong>Bug:</strong>
+      <% if @product.additional_integer_1 == 1 %>
+        <%= "true" %>&emsp;&emsp;
+      <% else %>
+        <%= "false" %>&emsp;&emsp;
+      <% end %>
+      <strong>Documentation:</strong>
+      <%= @product.bug %>&emsp;&emsp;
+     </p>
+  </fieldset>
+
+  <fieldset>
+    <legend><strong>Weight</strong></legend>
+    <p>
+      <strong>Units:</strong>
+      <%= @product.weight_units %>&emsp;&emsp;
+      <strong>Max:</strong>
+      <%= @product.weight_max %>&emsp;&emsp;
+      <strong>Min:</strong>
+      <%= @product.weight_min %>&emsp;&emsp;
+    </p>
+  </fieldset>
+
+  <fieldset>
+    <legend><strong>Pallet</strong></legend>
+    <p>
+      <strong>Number of layers:</strong>
+      <%= @product.pallet_layers %>&emsp;&emsp;
+      <strong>Boxes per layer:</strong>
+      <%= @product.pallet_count_per_layer %>&emsp;&emsp;
+      <strong>Length:</strong>
+      <%= @product.pallet_length %>&emsp;&emsp;
+      <strong>Width:</strong>
+      <%= @product.pallet_width %>&emsp;&emsp;
+      <strong>Height:</strong>
+      <%= @product.pallet_height %>&emsp;&emsp;
+    </p>
+  </fieldset>
+  <fieldset>
+    <legend><strong>Claims</strong></legend>
+    <p>
+      <strong>Antibiotic free:</strong><br>
+      <strong>Never ever:</strong>
+      <%= @product.never %>&emsp;&emsp;
+      <strong>Withdrawal:</strong>
+      <%= @product.withdrawal %>&emsp;&emsp;
+      <strong>Number of days:</strong>
+      <%= @product.withdrawal_days %>&emsp;&emsp;
+      <strong>Documentation:</strong>
+      <%= @product.never_doc %>&emsp;&emsp;
+      <strong>GMO free:</strong>
+      <%= @product.gmo_free %>&emsp;&emsp;
+      <strong>Documentation:</strong>
+      <%= @product.gmo_free_doc %>&emsp;&emsp;
+      <strong>Organic certification:</strong>
+      <%= @product.organic %>&emsp;&emsp;
+      <strong>Documentation:</strong>
+      <%= @product.organic_doc %>&emsp;&emsp;
+      <strong>Vaccinated:</strong>
+      <%= @product.vaccinated %>&emsp;&emsp;
+      <strong>Age:</strong>
+      <%= @product.vaccinated_age %>&emsp;&emsp;
+      <strong>Documentation:</strong>
+      <%= @product.vaccinated_doc %>&emsp;&emsp;
+    </p>
+    <p>
+      <strong>Humanely raised certification:</strong>
+      <%= @product.humane %>&emsp;&emsp;
+      <strong>Documentation:</strong>
+      <%= @product.humane_doc %>&emsp;&emsp;
+      <strong>Traceability to farm:</strong>
+      <%= @product.traceable %>&emsp;&emsp;
+      <strong>Documentation:</strong>
+      <%= @product.traceable_doc %>&emsp;&emsp;
+      <strong>Sqft inside:</strong>
+      <%= @product.sqft_inside %>&emsp;&emsp;
+      <strong>Sqft outside:</strong>
+      <%= @product.sqft_outside %>&emsp;&emsp;
+      <strong>Sqft total:</strong>
+      <%= @product.sqft_total %>&emsp;&emsp;
+      <strong>Documentation:</strong>
+      <%= @product.sqft_doc %>&emsp;&emsp;
+    </p>
+    <p>
+      <strong>Pastured:</strong>
+      <%= @product.pastured %>&emsp;&emsp;
+      <strong>Documentation:</strong>
+      <%= @product.pastured_doc %>&emsp;&emsp;
+      <strong>Omega3:</strong>
+      <%= @product.omega3 %>&emsp;&emsp;
+      <strong>Documentation:</strong>
+      <%= @product.omega3_doc %>&emsp;&emsp;
+      <strong>Vegetable fed:</strong>
+      <%= @product.vegetable %>&emsp;&emsp;
+      <strong>Documentation:</strong>
+      <%= @product.vegetable_doc %>&emsp;&emsp;
+      <strong>Other:</strong>
+      <% if @product.additional_integer_3 == 1 %>
+        <%= "true" %>&emsp;&emsp;
+      <% else %>
+        <%= "false" %>&emsp;&emsp;
+      <% end %>
+      <strong>Documentation:</strong>
+      <%= @product.other_doc %>&emsp;&emsp;
+    </p>
+  </fieldset>
+
+  <fieldset>
+    <legend><strong>Storage</strong></legend>
+    <p>
+      <strong>Production date(location/format):</strong>
+      <%= @product.production_date %>&emsp;&emsp;
+      <strong>Max days production to receipt:</strong>
+      <%= @product.prod_to_receipt %>&emsp;&emsp;
+      <strong>Shelf life(days):</strong>
+      <%= @product.shelf_life %>&emsp;&emsp;
+      <strong>Storage temp:</strong>
+      <%= @product.storage_temp %>&emsp;&emsp;
+      <strong>Microbiological support:</strong>
+      <%= @product.microbe %>&emsp;&emsp;
+      <strong>Physical sensory study support:</strong>
+      <%= @product.physical %>&emsp;&emsp;
+    </p>
+  </fieldset>
+
+  <fieldset>
+    <legend><strong>Other</strong></legend>
+    <p>
+      <strong>Vendor Specification:</strong>
+      <%= @product.vendor_spec %>&emsp;&emsp;
+      <strong>USDA approval:</strong>
+      <%= @product.usda_approve %>&emsp;&emsp;
+      <strong>Allergens:</strong>
+      <%= @product.allergens %>&emsp;&emsp;
+    </p>
+  </fieldset>
+</div>
+<br>
+<% if current_user.admin? %>
+  <button id="btnPrint">Print Preview</button>
+  <br>
+  <br>
+<% end %>
+<%= link_to 'Edit', edit_packet_product_path(@packet, @product) %>
+<%= link_to 'Product list', packet_products_path(@packet) %>
+<% link = '/packets/' + @packet.id.to_s %>
+<%= link_to 'Show Packet', link %>

@@ -1,0 +1,54 @@
+<p>
+  <strong>Packet number:</strong>
+  <%= @packet.packet_number %>&emsp;&emsp;
+  <strong>Vendor number:</strong>
+  <%= @packet.vendor_number %>&emsp;&emsp;
+  <strong>Requested date:</strong>
+  <%= "2018-01-10" %>&emsp;&emsp;
+  <!-- <%= @packet.requested_date %>&emsp;&emsp; -->
+  <strong>Due date:</strong>
+  <%= "2018-02-09"%>&emsp;&emsp;
+  <!-- <%= @packet.due_date %>&emsp;&emsp; -->
+</p>
+
+<fieldset>
+  <legend><strong>Company</strong></legend>
+  <p>
+    <strong>Name:</strong>
+    <%= @packet.company_name %>&emsp;&emsp;
+    <strong>Type:</strong>
+    <%= @packet.company_type %>&emsp;&emsp;
+    <strong>DBA:</strong>
+    <%= @packet.dba %>&emsp;&emsp;
+  </p>
+  <p>
+    <strong>Address 1:</strong>
+    <%= @packet.address_1 %>&emsp;&emsp;
+    <strong>Address 2:</strong>
+    <%= @packet.address_2 %>&emsp;&emsp;
+    <strong>City:</strong>
+    <%= @packet.city %>&emsp;&emsp;
+    <strong>Zip:</strong>
+    <%= @packet.zip %>&emsp;&emsp;
+    <strong>State:</strong>
+    <%= @packet.state %>&emsp;&emsp;
+    <strong>Country:</strong>
+    <%= @packet.cntry_code %>&emsp;&emsp;
+  </p>
+</fieldset>
+
+<fieldset>
+  <legend><strong>Ship Address</strong></legend>
+  <p>
+    <strong>Address 1:</strong>
+    <%= @packet.ship_address_1 %>&emsp;&emsp;
+    <strong>Address 2:</strong>
+    <%= @packet.ship_address_2 %>&emsp;&emsp;
+    <strong>City:</strong>
+    <%= @packet.ship_city %>&emsp;&emsp;
+    <strong>Zip:</strong>
+    <%= @packet.ship_zip %>&emsp;&emsp;
+    <strong>State:</strong>
+    <%= @packet.ship_state %>&emsp;&emsp;
+  </p>
+</fieldset>

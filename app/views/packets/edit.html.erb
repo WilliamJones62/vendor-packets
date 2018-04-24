@@ -1,0 +1,5 @@
+<h1>Editing Packet</h1>
+
+<%= render 'form', packet: @packet %>
+<% link = '/packets/' + @packet.id.to_s + '/products' %>
+<%= link_to 'Product list', link %>
