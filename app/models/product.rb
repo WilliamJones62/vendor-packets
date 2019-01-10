@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
   belongs_to :packet, :foreign_key => "packet_id"
+  validates :product_name, presence: true
   validate :mandatory_validation
   validate :claims_documentation
   validate :bug_validation

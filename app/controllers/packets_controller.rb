@@ -2,17 +2,19 @@ class PacketsController < ApplicationController
   before_action :set_packet, only: [:show, :edit, :update, :destroy]
 
   # GET /packets
-  # GET /packets.json
   def index
     if current_user.admin?
       @packets = Packet.all
     else
       @packets = Packet.where("user_id = ?", current_user.id)
     end
+    respond_to do |format|
+      format.html
+      format.csv { send_data @packets.to_csv }
+    end
   end
 
   # GET /packets/1
-  # GET /packets/1.json
   def show
   end
 
@@ -32,7 +34,6 @@ class PacketsController < ApplicationController
   end
 
   # POST /packets
-  # POST /packets.json
   def create
     @packet = Packet.new(packet_params)
     @packet.user_id = current_user.id
@@ -46,7 +47,6 @@ class PacketsController < ApplicationController
   end
 
   # PATCH/PUT /packets/1
-  # PATCH/PUT /packets/1.json
   def update
     respond_to do |format|
       if @packet.update(packet_params)
@@ -58,7 +58,6 @@ class PacketsController < ApplicationController
   end
 
   # DELETE /packets/1
-  # DELETE /packets/1.json
   def destroy
     @packet.destroy
     respond_to do |format|

@@ -304,7 +304,7 @@
     <tbody>
       <tr>
         <td> <%= form.text_field :website, id: :packet_website, title: "The URL of your company's website" %> </td>
-        <td> <%= form.text_field :notes, id: :packet_notes, placeholder: "Document upload ref.", title: "Any additional information you wish to upload" %> </td>
+        <td> <%= form.text_area :notes, size: "20x2", id: :packet_notes, placeholder: "Notes", title: "Any additional information you wish to upload" %> </td>
         <td> <%= form.text_field :non_disclosure, id: :packet_non_disclosure, placeholder: "Document upload ref.", title: "Signed non disclosure agreement" %> </td>
         <td> <%= form.text_field :w9, id: :packet_w9, placeholder: "Document upload ref.", title: "A blank copy of the form can be obtained at https://www.irs.gov/pub/irs-pdf/fw9.pdf" %> </td>
         <td> <%= form.text_field :guarantee, id: :packet_guarantee, placeholder: "Document upload ref." %> </td>

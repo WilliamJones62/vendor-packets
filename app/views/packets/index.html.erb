@@ -43,4 +43,5 @@
 
 <% if current_user.admin? %>
   <%= link_to 'New Packet', new_packet_path %>
+  <%= link_to 'CSV download', packets_path(format: "csv") %>
 <% end %>

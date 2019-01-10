@@ -6,6 +6,16 @@ class Packet < ApplicationRecord
   validate :usda_2_validation
   validate :usda_3_validation
 
+  def self.to_csv
+    attributes = %w{vendor_number company_name primary_contact phone_1 phone_2 email ops_name ops_phone_1 ops_phone_2 ops_email qa_name qa_phone_1 qa_phone_2 qa_email haccp_1_type haccp_1_company problems_2 haccp_1_score haccp_1_expires haccp_1_scheduled haccp_2_type haccp_2_company problems_3 haccp_2_score haccp_2_expires haccp_2_scheduled}
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+      all.each do |packet|
+        csv << packet.attributes.values_at(*attributes)
+      end
+    end
+  end
+
   def mandatory_validation
     if additional_integer_1 == 1
       if !primary_contact.present?

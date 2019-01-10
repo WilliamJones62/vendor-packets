@@ -28,14 +28,33 @@
     </tbody>
   </table>
 
-  <p>
-    <strong>Packet number:</strong>
-    <%= @packet.packet_number %>&emsp;&emsp;
-    <strong>Product code:</strong>
-    <%= @product.product_code %>&emsp;&emsp;
-    <strong>Product description:</strong>
-    <%= @product.product_name %>&emsp;&emsp;
-  </p>
+  <% if !current_user.admin? %>
+    <p>
+      <strong>Packet number:</strong>
+      <%= @packet.packet_number %>&emsp;&emsp;
+      <strong>Product code:</strong>
+      <%= @product.product_code %>&emsp;&emsp;
+      <strong>Product description:</strong>
+      <%= @product.product_name %>&emsp;&emsp;
+    </p>
+  <% else %>
+    <table class="field">
+      <thead>
+        <tr>
+          <th>Packet number</th>
+          <th> <%= form.label :product_code %> </th>
+          <th> <%= form.label :product_name, "Product description" %> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> <%= @packet.packet_number %> </td>
+          <td> <%= form.text_field :product_code, id: :product_product_code, title: "E21 code for this product" %> </td>
+          <td> <%= form.text_field :product_name, id: :product_product_name, title: "E21 description for this product" %> </td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
 
   <table class="field">
     <thead>

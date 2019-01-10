@@ -39,7 +39,11 @@ class HomeController < ApplicationController
           end
         end
         total_products = packet.products.all.count - inactive
-        products_completed_percentage = (products_completed * 80) / total_products
+        if total_products == 0
+          products_completed_percentage = 100
+        else
+          products_completed_percentage = (products_completed * 80) / total_products
+        end
         percentage_complete += products_completed_percentage
         if percentage_complete > 100
           percentage_complete = 100
@@ -78,7 +82,11 @@ class HomeController < ApplicationController
           else
             @percentages[5] += 1
             @percent100code.push(packet.vendor_number)
-            company_name = packet.company_name.gsub(/\s/, '~')
+            if packet.company_name
+              company_name = packet.company_name.gsub(/\s/, '~')
+            else
+              company_name = ' '
+            end
             @percent100name.push(company_name)
             @percent100packet.push(packet.id)
         end
