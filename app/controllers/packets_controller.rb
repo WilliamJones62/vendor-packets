@@ -3,10 +3,10 @@ class PacketsController < ApplicationController
 
   # GET /packets
   def index
-    if current_user.admin?
+    if current_user7.admin?
       @packets = Packet.all
     else
-      @packets = Packet.where("user_id = ?", current_user.id)
+      @packets = Packet.where("user_id = ?", current_user7.id)
     end
     respond_to do |format|
       format.html
@@ -25,8 +25,8 @@ class PacketsController < ApplicationController
 
   # GET /packets/1/edit
   def edit
-    if !current_user.admin?
-      @packet = Packet.where("user_id = ?", current_user.id).last
+    if !current_user7.admin?
+      @packet = Packet.where("user_id = ?", current_user7.id).last
       if @packet.completed
         redirect_to @packet, notice: 'Packet is now read only.'
       end
@@ -36,7 +36,7 @@ class PacketsController < ApplicationController
   # POST /packets
   def create
     @packet = Packet.new(packet_params)
-    @packet.user_id = current_user.id
+    @packet.user_id = current_user7.id
     respond_to do |format|
       if @packet.save
         format.html { redirect_to @packet, notice: 'Packet was successfully created.' }
@@ -74,7 +74,7 @@ class PacketsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_packet
       @packet = Packet.find(params[:id])
-      unless current_user.id == @packet.user_id || current_user.admin?
+      unless current_user7.id == @packet.user_id || current_user7.admin?
        redirect_to root_path, :alert => "Access denied."
       end
     end

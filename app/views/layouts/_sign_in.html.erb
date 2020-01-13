@@ -1,21 +1,21 @@
-<% if user_signed_in? %>
-  <span>Signed in as <%= current_user.email %></span>
+<% if user7_signed_in? %>
+  <span>Signed in as <%= current_user7.email %></span>
 <% else %>
   <span>No user currently signed in</span>
 <% end %>
 <span id="navbar">
-  <% if user_signed_in? %>
+  <% if user7_signed_in? %>
     <span><a href="/home/ftpguides">Upload Guide</a></span>
     <span><a href="/home/websiteguides">Website Guide</a></span>
     <span><a href="ftp://10.0.0.190" target="_blank">Upload</a></span>
     <span><a href="/">Home</a></span>
-    <span><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></span>
-    <% if current_user.admin? %>
-      <span><%= link_to 'Edit user', edit_user_registration_path %></span>
-      <span><%= link_to 'Sign up', new_user_registration_path %></span>
+    <span><%= link_to 'Sign out', destroy_user7_session_path, method: :delete %></span>
+    <% if current_user7.admin? %>
+      <span><%= link_to 'Edit user', edit_user7_registration_path %></span>
+      <span><%= link_to 'Sign up', new_user7_registration_path %></span>
       <span><a href="/home/inactive">Inactive</a></span>
     <% end %>
   <% else %>
-    <span><%= link_to 'Sign in', new_user_session_path %></span>
+    <span><%= link_to 'Sign in', new_user7_session_path %></span>
   <% end %>
 </span>

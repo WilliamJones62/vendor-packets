@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def show
-    if current_user.admin?
+    if current_user7.admin?
       @packets = Packet.all
       @percentages = [0, 0, 0, 0, 0, 0]
       @percent0code = []
@@ -91,7 +91,7 @@ class HomeController < ApplicationController
             @percent100packet.push(packet.id)
         end
 
-        u = User.where("id = ?", packet.user_id).first
+        u = User7.where("id = ?", packet.user_id).first
         if u.current_sign_in_at
           current_sign_in_at = u.current_sign_in_at
         else
@@ -117,7 +117,7 @@ class HomeController < ApplicationController
   end
 
   def inactive
-    users = User.all
+    users = User7.all
     @packets = []
     users.each do |u|
       if !u.current_sign_in_at

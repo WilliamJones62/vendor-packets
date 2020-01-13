@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       collection { post :import }
     end
   end
-  devise_for :users, controllers: { registrations: "users/registrations" }
+  devise_for :user7s, controllers: { registrations: "users/registrations" }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'home#show'
   get 'home/inactive' => 'home#inactive'

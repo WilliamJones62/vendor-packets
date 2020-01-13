@@ -7,7 +7,7 @@
       <th>Product code</th>
       <th>Show</th>
       <th>Edit</th>
-      <% if current_user.admin? %>
+      <% if current_user7.admin? %>
         <th>Destroy</th>
       <% end %>
       <th>Completed?</th>
@@ -24,7 +24,7 @@
           <td><%= @product.product_code %></td>
           <td><%= link_to 'Show', packet_product_path(@packet, @product) %></td>
           <td><%= link_to 'Edit', edit_packet_product_path(@packet, @product) %></td>
-          <% if current_user.admin? %>
+          <% if current_user7.admin? %>
             <td><%= link_to 'Destroy', [@packet, @product], method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <% end %>
           <% if @product.additional_integer_2 == 1 %>
@@ -40,7 +40,7 @@
 
 <br>
 
-<% if current_user.admin? %>
+<% if current_user7.admin? %>
   <%= link_to 'New Product', new_packet_product_path(@packet) %>
 <% end %>
 <% link = '/packets/' + @packet.id.to_s %>

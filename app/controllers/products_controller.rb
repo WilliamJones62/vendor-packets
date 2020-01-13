@@ -137,7 +137,7 @@ class ProductsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def load_packet
       @packet = Packet.find(params[:packet_id])
-      unless current_user.id == @packet.user_id || current_user.admin?
+      unless current_user7.id == @packet.user_id || current_user7.admin?
        redirect_to root_path, :alert => "Access denied."
       end
     end

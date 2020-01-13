@@ -1,4 +1,4 @@
-<% if current_user.admin? %>
+<% if current_user7.admin? %>
   <p>
     <strong>Completed:</strong>
     <%= @packet.completed %>&emsp;&emsp;
@@ -207,13 +207,13 @@
   </p>
 </div>
 
-<% if current_user.admin? %>
+<% if current_user7.admin? %>
   <button id="btnPrint">Print Preview</button>
   <br>
   <br>
 <% end %>
 <%= link_to 'Edit', edit_packet_path(@packet) %>
-<% if current_user.admin? %>
+<% if current_user7.admin? %>
   <%= link_to 'Packet list', packets_path %>
 <% end %>
 <% link = '/packets/' + @packet.id.to_s + '/products' %>
